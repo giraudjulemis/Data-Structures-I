@@ -6,16 +6,27 @@
 */
 class Stack {
   constructor() {
-    this.storage = [];
+    // this.storage = [];
+    this.storage = {};
+    this.count = 0;
   }
   get size() {
-    return this.storage.length;
+    // return this.storage.length;
+    return this.count;
   }
   push(value) {
-    return this.storage.push(value);
+    // return this.storage.push(value);
+    this.storage[this.count++] = value;
+    return this.count;
   }
   pop() {
-    return this.storage.pop();
+    // return this.storage.pop();
+    const removed = this.storage[--this.count];
+    delete this.storage[this.count];
+    if (this.count < 0) {
+      this.count = 0;
+    }
+    return removed;
   }
 }
 
