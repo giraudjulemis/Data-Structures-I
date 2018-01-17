@@ -6,16 +6,23 @@
 */
 class Queue {
   constructor() {
-    this.storage = [];
+    this.storage = {};
+    this.head = 0;
+    this.tail = 0;
   }
   get size() {
-    return this.storage.length;
+    this.count = this.tail - this.head;
+    return this.count;
   }
   enqueue(value) {
-    return this.storage.unshift(value);
+    this.storage[this.tail++] = value;
+    return this.count;
   }
   dequeue() {
-    return this.storage.pop();
+    const removed = this.storage[this.head];
+    delete this.storage[this.head];
+    if (this.head < this.tail) this.head++;
+    return removed;
   }
 }
 
